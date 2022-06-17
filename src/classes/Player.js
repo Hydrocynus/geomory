@@ -13,4 +13,8 @@ export class Player {
   static getActivePlayer() {
     return Player.players.find(player => player.active === 1);
   }
+
+  static removePlayer(player) {
+    this.players = this.players.filter(p => p !== player);
+  }
 }
