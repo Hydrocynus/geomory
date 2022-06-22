@@ -1,8 +1,8 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> | 
-    <router-link to="/newgame">New Game</router-link>
-    <router-link to="/"><i class="fas fa-house"></i></router-link>
+    <router-link to="/">Home <i class="fas fa-house"></i></router-link> | 
+    <router-link to="/newgame">New Game <i class="fa-solid fa-gamepad"></i></router-link>
+
     <!-- <router-link to="/about">About</router-link> -->
   </nav>
   <router-view></router-view>
