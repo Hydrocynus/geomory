@@ -4,9 +4,9 @@ import NewGame from '../views/NewGame.vue'
 import Game from '../views/Game.vue'
 
 const routes = [
-  { path: '/', component: Menu },
-  { path: '/newgame', component: NewGame },
-  { path: '/game', component: Game },
+  { path: '/', name: "home", component: Menu },
+  { path: '/newgame', name: "newgame", component: NewGame },
+  { path: '/game', name: "game", component: Game, props: true },
 ]
 
 const router = createRouter({

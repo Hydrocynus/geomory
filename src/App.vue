@@ -1,7 +1,7 @@
 <template>
   <nav>
-    <router-link to="/">Home <i class="fas fa-house"></i></router-link> | 
-    <router-link to="/newgame">New Game <i class="fa-solid fa-gamepad"></i></router-link>
+    <router-link :to="{name:'home'}">Home <i class="fas fa-house"></i></router-link> | 
+    <router-link :to="{name:'newgame'}">New Game <i class="fa-solid fa-gamepad"></i></router-link>
 
     <!-- <router-link to="/about">About</router-link> -->
   </nav>
@@ -9,10 +9,14 @@
 </template>
 
 <style>
+@import './assets/base.css';
+
 * {
   margin: 0;
   padding: 0;
   border: 0;
+  background-color: unset;
+  color: unset;
 }
 
 #app {
@@ -20,7 +24,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
 }
 
 nav {
@@ -29,7 +32,8 @@ nav {
 
 nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: unset;
+    text-decoration: none;
 }
 
 nav a.router-link-exact-active {

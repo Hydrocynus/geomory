@@ -29,7 +29,7 @@
 
   function submit() {
     chamber.value.players = chamber.value.players.filter(player => player.name.length > 0)
-    router.push({path: "/game" ,cardCnt: cardCnt, chamber: chamber})
+    router.push({name: "game", params: {players: JSON.stringify(chamber.value.players)}})
   }
 
   function inputPressed(event) {
