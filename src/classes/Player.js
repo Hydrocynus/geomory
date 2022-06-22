@@ -5,7 +5,6 @@ export class Player {
     this.name = name;
     this.score = 0;
     this.id = Player.maxID++;
-    this.active = 0;
+    this.activeIn = 0;
   }
-
 }
