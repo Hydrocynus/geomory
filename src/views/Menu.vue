@@ -1,5 +1,4 @@
 <script setup>
-  import { Card } from '../components/Card.vue'
   import { ref } from 'vue'
 
   const data = ref([0,1,2,3,6,5])
