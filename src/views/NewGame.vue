@@ -12,20 +12,18 @@ import router from '@/router';
     if (chamber.value.players.length < maxPlayers) {
       const player = new Player('')
       chamber.value.addPlayer(player)
-      console.debug(player, chamber.players)
     }
   }
 
   function removePlayer(player) {
     chamber.value.removePlayer(player)
-    console.debug(player, chamber.players)
   }
 
 
   function submit() {
     chamber.value.players = chamber.value.players.filter(player => player.name.length > 0)
 
-    if (chamber.value.players.length < maxPlayers) {
+    if (chamber.value.players.length < 1) {
       document.getElementById("notEnoughPlayersMSG").style.display = "block"
       return
     }
