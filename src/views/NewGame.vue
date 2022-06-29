@@ -54,10 +54,11 @@ import { computed } from '@vue/reactivity';
   }
 
   function focusLastInput() {
-    setTimeout(() => document.querySelector(".playerDisplayDiv:last-of-type input")?.focus(), 0)
+    setTimeout(() => document.querySelector(".playerInputContainer:last-of-type input")?.focus(), 0)
   }
 
   function submit() {
+    if (setPlayers.value.length < 2) return
     const params = {
       players: JSON.stringify(setPlayers.value),
       cards: JSON.stringify(cards.value),
@@ -74,7 +75,7 @@ import { computed } from '@vue/reactivity';
 
   addPlayer()
   addPlayer()
-  setTimeout(() => document.querySelector(".playerDisplayDiv:first-of-type input")?.focus(), 0)
+  setTimeout(() => document.querySelector(".playerInputContainer:first-of-type input")?.focus(), 0)
 
 </script>
 
@@ -88,7 +89,7 @@ import { computed } from '@vue/reactivity';
       </div>
       <div class="cityPick selectInputContainer">
         <label for="cityFilter">City: </label>
-        <select id="cityFilter" v-model="cityFilter">
+        <select tabindex="0" id="cityFilter" v-model="cityFilter">
           <option value="" selected>ALL</option>
           <option v-for="city in cities" :value="city">{{ city }}</option>
         </select>
@@ -97,13 +98,13 @@ import { computed } from '@vue/reactivity';
         <h3 id="notEnoughPlayersMSG" v-if="chamber.players.length < 2">You gotta have at least two players</h3>
         <h2>Players: {{ chamber.players.length }} / {{ maxPlayers }}</h2>
         <div class="playerInputContainer textInputContainer" v-for="player in chamber.players">
-            <input  v-model.trim="player.name" placeholder="Playername" @keypress="inputPressed"/>
+            <input tabindex="1"  v-model.trim="player.name" placeholder="Playername" @keypress="inputPressed"/>
             <button class="btn" @click="removePlayer(player)"><i class="fa-solid fa-user-minus"></i></button>
         </div>
       </div>
       <div class="bottomButtons">
         <button class="btn" @click="addPlayer()">Add Player <i class="fa-solid fa-user-plus"></i></button>
-        <button class="btn" @click="submit()">Start Game <i class="fa-solid fa-location-arrow"></i></button>
+        <button :class="{btn: true, disabled: setPlayers.length < 2}" @click="submit()">Start Game <i class="fa-solid fa-location-arrow"></i></button>
       </div>
         </div>
   </div>
