@@ -80,27 +80,30 @@ import { computed } from '@vue/reactivity';
 
 <template>
 
-  <h3 id="notEnoughPlayersMSG" v-if="chamber.players.length < 2">You gotta have at least two players, bro</h3>
+  <div class="wholeContainer">
 
-  <h2>Cards: {{ cardCnt }}</h2>
-  <input type="range" min="4" max="50" step="2" v-model.number="cardCnt" placeholder="Card Count" />
-  <div class="cityPick selectInputContainer">
-    <label for="cityFilter">Filter: </label>
-    <select id="cityFilter" v-model="cityFilter">
-      <option value="" selected>ALL</option>
-      <option v-for="city in cities" :value="city">{{ city }}</option>
-    </select>
-  </div>
-  <h2>Players: {{ chamber.players.length }} / {{ maxPlayers }}</h2>
-  <div class="playerDisplayDiv" v-for="player in chamber.players">
-    <div class="textInputContainer">
-      <input  v-model.trim="player.name" placeholder="Playername" @keypress="inputPressed"/>
-      <button class="btn" @click="removePlayer(player)"><i class="fa-solid fa-user-minus"></i></button>
+    <h3 id="notEnoughPlayersMSG" v-if="chamber.players.length < 2">You gotta have at least two players, bro</h3>
+
+    <div class="cardPick">
+      <h2>Cards: {{ cardCnt }}</h2>
+      <input type="range" min="4" max="50" step="2" v-model.number="cardCnt" placeholder="Card Count" />
     </div>
-  </div>
-  <div class="bottomButtons">
-    <button class="btn item" @click="addPlayer()">Add Player <i class="fa-solid fa-user-plus"></i></button>
-    <button class="btn item" @click="submit()">Start Game <i class="fa-solid fa-location-arrow"></i></button>
+    <div class="cityPick selectInputContainer">
+      <label for="cityFilter">City: </label>
+      <select id="cityFilter" v-model="cityFilter">
+        <option value="" selected>ALL</option>
+        <option v-for="city in cities" :value="city">{{ city }}</option>
+      </select>
+    </div>
+    <h2>Players: {{ chamber.players.length }} / {{ maxPlayers }}</h2>
+    <div class="playerInputContainer textInputContainer" v-for="player in chamber.players">
+        <input  v-model.trim="player.name" placeholder="Playername" @keypress="inputPressed"/>
+        <button class="btn" @click="removePlayer(player)"><i class="fa-solid fa-user-minus"></i></button>
+    </div>
+    <div class="bottomButtons">
+      <button class="btn" @click="addPlayer()">Add Player <i class="fa-solid fa-user-plus"></i></button>
+      <button class="btn" @click="submit()">Start Game <i class="fa-solid fa-location-arrow"></i></button>
+    </div>
   </div>
 </template>
 
@@ -108,20 +111,34 @@ import { computed } from '@vue/reactivity';
 
 /* https://colorhunt.co/palette/eeeddee0ddaa203239141e27 */
 
-.btn {
-  font-size: 1.5em;
-  font-weight: bold;
-  border-radius: 5px;
-  padding: 5px;
-  border: #203239 1px solid;
-  cursor: pointer;
-  transition: all 0.1s ease-in-out;
+.wholeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.btn:hover {
-  color: #141E27;
-  border: #141E27 2px solid;
-  padding: 4px;
+.cardPick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.cardPick h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.cardPick input {
+  width: 200px;
+  margin: 0;
+  padding: 0;
+  font-size: 1.5em;
+  font-weight: bold;
 }
 
 .cityPick {
@@ -137,7 +154,7 @@ import { computed } from '@vue/reactivity';
   margin-right: 10px;
 }
 
-.textInput {
+.playerInputContainer {
   display: flex;
   flex-direction: row;
   align-items: center;
