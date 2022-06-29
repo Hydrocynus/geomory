@@ -80,30 +80,80 @@ import { computed } from '@vue/reactivity';
 
 <template>
 
-  <h2 id="notEnoughPlayersMSG" v-if="chamber.players.length < 2">You gotta have at least two players, bro</h2>
+  <h3 id="notEnoughPlayersMSG" v-if="chamber.players.length < 2">You gotta have at least two players, bro</h3>
 
-  <h3>Cards: {{ cardCnt }}</h3>
+  <h2>Cards: {{ cardCnt }}</h2>
   <input type="range" min="4" max="50" step="2" v-model.number="cardCnt" placeholder="Card Count" />
-  <br>
-  <label for="cityFilter">Filter: </label>
-  <select id="cityFilter" v-model="cityFilter">
-    <option value="" selected>ALL</option>
-    <option v-for="city in cities" :value="city">{{ city }}</option>
-  </select>
-  <br>
-  <br>
-  <h3>Players: {{ chamber.players.length }} / {{ maxPlayers }}</h3>
-  <div class="playerDisplayDiv" v-for="player in chamber.players">
-    <input v-model.trim="player.name" placeholder="Playername" @keypress="inputPressed"/>
-    <button @click="removePlayer(player)"><i class="fa-solid fa-user-minus"></i></button>
+  <div class="cityPick selectInputContainer">
+    <label for="cityFilter">Filter: </label>
+    <select id="cityFilter" v-model="cityFilter">
+      <option value="" selected>ALL</option>
+      <option v-for="city in cities" :value="city">{{ city }}</option>
+    </select>
   </div>
-  <button @click="addPlayer()">Add Player <i class="fa-solid fa-user-plus"></i></button>
-
-  <br>
-  <br>
-    <button @click="submit()">Start Game <i class="fa-solid fa-location-arrow"></i></button>
+  <h2>Players: {{ chamber.players.length }} / {{ maxPlayers }}</h2>
+  <div class="playerDisplayDiv" v-for="player in chamber.players">
+    <div class="textInputContainer">
+      <input  v-model.trim="player.name" placeholder="Playername" @keypress="inputPressed"/>
+      <button class="btn" @click="removePlayer(player)"><i class="fa-solid fa-user-minus"></i></button>
+    </div>
+  </div>
+  <div class="bottomButtons">
+    <button class="btn item" @click="addPlayer()">Add Player <i class="fa-solid fa-user-plus"></i></button>
+    <button class="btn item" @click="submit()">Start Game <i class="fa-solid fa-location-arrow"></i></button>
+  </div>
 </template>
 
 <style>
+
+/* https://colorhunt.co/palette/eeeddee0ddaa203239141e27 */
+
+.btn {
+  font-size: 1.5em;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 5px;
+  border: #203239 1px solid;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.btn:hover {
+  color: #141E27;
+  border: #141E27 2px solid;
+  padding: 4px;
+}
+
+.cityPick {
+  font-size: 1.3em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+.cityPick label {
+  margin-right: 10px;
+}
+
+.textInput {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  gap: 20px;
+}
+
+.bottomButtons {
+  display: grid;
+  justify-items: stretch;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+
 
 </style>
