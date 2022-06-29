@@ -1,7 +1,6 @@
 <template>
   <nav>
     <router-link :to="{name:'home'}">Home <i class="fas fa-house"></i></router-link> | 
-    <router-link :to="{name:'newgame'}">New Game <i class="fa-solid fa-gamepad"></i></router-link>
 
     <!-- <router-link to="/about">About</router-link> -->
   </nav>
