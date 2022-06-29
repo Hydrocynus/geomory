@@ -34,17 +34,23 @@ export class CardStack {
     this.cards.forEach(c => c.visible = false);
   }
 
+  getCardById (id) {
+    return this.cards.find(c => c.id === id);
+  }
+
   view (card) {
+    if (card.matched) return false;
     let scoreUp = false
     const visibles = this.getVisibleCards()
+    card.visible = true
+    visibles.push(card)
     if (visibles.length >= 2) {
       if (visibles[0].id === visibles[1].matches) {
         scoreUp = true
         visibles.forEach(c => c.matched = true)
+        this.hideAll()
       }
-      this.hideAll()
     }
-    card.visible = true
     return scoreUp
   }
 }
