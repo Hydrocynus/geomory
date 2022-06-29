@@ -1,11 +1,14 @@
 <template>
-  <nav>
-    <router-link :to="{name:'home'}">Home <i class="fas fa-house"></i></router-link> | 
-    <router-link :to="{name:'newgame'}">New Game <i class="fa-solid fa-gamepad"></i></router-link>
+  <div>
 
-    <!-- <router-link to="/about">About</router-link> -->
-  </nav>
-  <router-view></router-view>
+      <nav>
+        <router-link :to="{name:'home'}">Home <i class="fas fa-house"></i></router-link> | 
+        <router-link :to="{name:'newgame'}">New Game <i class="fa-solid fa-gamepad"></i></router-link>
+
+      <!-- <router-link to="/about">About</router-link> -->
+      </nav>
+    <router-view></router-view>
+  </div>
 </template>
 
 <style>
@@ -39,4 +42,52 @@ nav a {
 nav a.router-link-exact-active {
   color: #42b983;
 }
+
+body {
+  background-color: #EEEDDE;
+  color: #203239;
+}
+
+.btn {
+  font-size: 1.5em;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 5px;
+  border: #203239 1px solid;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.btn:hover {
+  color: #141E27;
+  border: #141E27 2px solid;
+  padding: 4px;
+}
+
+.textInputContainer input{
+  font-size: 1.3em;
+  background-color: transparent;
+  border-bottom: 1px solid #E0DDAA;
+}
+
+.textInputContainer input:focus {
+  border-bottom: 1px solid #203239;
+  outline: transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.selectInputContainer select{
+  font-size: 1em;
+  background-color: transparent;
+  border-bottom: 1px solid #E0DDAA;
+}
+
+.selectInputContainer select:focus {
+  border-bottom: 1px solid #203239;
+  outline: transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+
+
 </style>

@@ -80,30 +80,106 @@ import { computed } from '@vue/reactivity';
 
 <template>
 
-  <h2 id="notEnoughPlayersMSG" v-if="chamber.players.length < 2">You gotta have at least two players, bro</h2>
-
-  <h3>Cards: {{ cardCnt }}</h3>
-  <input type="range" min="4" max="50" step="2" v-model.number="cardCnt" placeholder="Card Count" />
-  <br>
-  <label for="cityFilter">Filter: </label>
-  <select id="cityFilter" v-model="cityFilter">
-    <option value="" selected>ALL</option>
-    <option v-for="city in cities" :value="city">{{ city }}</option>
-  </select>
-  <br>
-  <br>
-  <h3>Players: {{ chamber.players.length }} / {{ maxPlayers }}</h3>
-  <div class="playerDisplayDiv" v-for="player in chamber.players">
-    <input v-model.trim="player.name" placeholder="Playername" @keypress="inputPressed"/>
-    <button @click="removePlayer(player)"><i class="fa-solid fa-user-minus"></i></button>
+  <div class="gridContainer">
+    <div class="gridItem">
+      <div class="cardPick">
+        <h2>Cards: {{ cardCnt }}</h2>
+        <input type="range" min="4" max="50" step="2" v-model.number="cardCnt" placeholder="Card Count" />
+      </div>
+      <div class="cityPick selectInputContainer">
+        <label for="cityFilter">City: </label>
+        <select id="cityFilter" v-model="cityFilter">
+          <option value="" selected>ALL</option>
+          <option v-for="city in cities" :value="city">{{ city }}</option>
+        </select>
+      </div>
+      <div class="playerPick">
+        <h3 id="notEnoughPlayersMSG" v-if="chamber.players.length < 2">You gotta have at least two players</h3>
+        <h2>Players: {{ chamber.players.length }} / {{ maxPlayers }}</h2>
+        <div class="playerInputContainer textInputContainer" v-for="player in chamber.players">
+            <input  v-model.trim="player.name" placeholder="Playername" @keypress="inputPressed"/>
+            <button class="btn" @click="removePlayer(player)"><i class="fa-solid fa-user-minus"></i></button>
+        </div>
+      </div>
+      <div class="bottomButtons">
+        <button class="btn" @click="addPlayer()">Add Player <i class="fa-solid fa-user-plus"></i></button>
+        <button class="btn" @click="submit()">Start Game <i class="fa-solid fa-location-arrow"></i></button>
+      </div>
+        </div>
   </div>
-  <button @click="addPlayer()">Add Player <i class="fa-solid fa-user-plus"></i></button>
-
-  <br>
-  <br>
-    <button @click="submit()">Start Game <i class="fa-solid fa-location-arrow"></i></button>
 </template>
 
 <style>
+
+/* https://colorhunt.co/palette/eeeddee0ddaa203239141e27 */
+
+.gridContainer {
+  grid-template-columns: 25% auto 25%;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+} 
+
+.gridItem {
+  grid-column-start: 2;
+}
+
+.cardPick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.cardPick h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.cardPick input {
+  width: 100%;
+}
+
+.cityPick {
+  font-size: 1.3em;
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.cityPick label {
+  margin-right: 10px;
+}
+
+.playerPick #notEnoughPlayersMSG {
+  color: red;
+  font-size: 1.2em;
+  font-weight: bolder;
+  margin-bottom: 10px;
+}
+
+.playerInputContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: stretch;
+  margin-bottom: 10px;
+  gap: 20px;
+}
+
+.bottomButtons {
+  display: grid;
+  justify-items: stretch;
+  justify-content: stretch;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+
 
 </style>
