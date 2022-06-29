@@ -58,10 +58,16 @@ body {
   transition: all 0.1s ease-in-out;
 }
 
-.btn:hover {
+.btn:not(.disabled):hover {
   color: #141E27;
   border: #141E27 2px solid;
   padding: 4px;
+}
+
+.btn.disabled {
+  color: #aaa;
+  border: #aaa 1px solid;
+  background-color: rgba(0,0,0,0.05)
 }
 
 .textInputContainer input{
