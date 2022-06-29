@@ -1,10 +1,6 @@
 <template>
-<<<<<<< HEAD
-  <div class="background">
-=======
-  <nav>
+  <div>
     <router-link :to="{name:'home'}">Home <i class="fas fa-house"></i></router-link> | 
->>>>>>> 420bd6831cfd58ec7d0eff2a729523b5f28bbb31
 
       <nav>
         <router-link :to="{name:'home'}">Home <i class="fas fa-house"></i></router-link> | 
