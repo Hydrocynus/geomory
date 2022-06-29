@@ -133,15 +133,47 @@ import { computed } from '@vue/reactivity';
 }
 
 .cardPick h2 {
-  margin: 0;
+  margin-bottom: 10px;
   padding: 0;
   font-size: 1.5em;
   font-weight: bold;
 }
 
 .cardPick input {
+  -webkit-appearance: none;
   width: 100%;
+  height: 15px;
+  border-radius: 5px;  
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+  accent-color: #203239;
 }
+
+.cardPick input::-webkit-slider-thumb {
+  -webkit-appearance: false;
+  appearance: none;
+  width: 50px;
+  height: 50px;
+  border: 0;
+  background: url('../assets/logo.svg') no-repeat;
+  cursor: pointer;
+
+}
+
+
+.cardPick input::-moz-range-thumb {
+  width: 50px;
+  height: 50px;
+  border: 0;
+  background: url('../assets/logo.svg') no-repeat;
+  cursor: pointer;
+}
+
+
+
 
 .cityPick {
   font-size: 1.3em;
