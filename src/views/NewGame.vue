@@ -2,8 +2,9 @@
   import { ref } from 'vue'
   import { Player } from '@/classes/Player'
   import { PlayerChamber } from '@/classes/PlayerChamber'
+  import { Geo } from '@/classes/Geo'
   import router from '@/router';
-import { computed } from '@vue/reactivity';
+  import { computed } from '@vue/reactivity';
 
   const chamber = ref(new PlayerChamber())
   const cardCnt = ref(4)
@@ -12,20 +13,21 @@ import { computed } from '@vue/reactivity';
 
   // const api = ""
   // const data = await (await fetch(api)).json()
-  const data = [
-    {id: 0, matches: 5, city: "Dortmund", url: "..."},
-    {id: 1, matches: 2, city: "Essen", url: "..."},
-    {id: 2, matches: 1, city: "Essen", url: "..."},
-    {id: 3, matches: 4, city: "Dortmund", url: "..."},
-    {id: 4, matches: 3, city: "Dortmund", url: "..."},
-    {id: 5, matches: 0, city: "Dortmund", url: "..."},
-    {id: 6, matches: 9, city: "Mülheim an der Ruhr", url: "..."},
-    {id: 7, matches: 8, city: "Mülheim an der Ruhr", url: "..."},
-    {id: 8, matches: 7, city: "Mülheim an der Ruhr", url: "..."},
-    {id: 9, matches: 6, city: "Mülheim an der Ruhr", url: "..."},
-    {id: 10, matches: 11, city: "Bochum", url: "..."},
-    {id: 11, matches: 10, city: "Bochum", url: "..."},
-  ]
+  // const data = [
+  //   {id: 0, matches: 5, city: "Dortmund", url: "..."},
+  //   {id: 1, matches: 2, city: "Essen", url: "..."},
+  //   {id: 2, matches: 1, city: "Essen", url: "..."},
+  //   {id: 3, matches: 4, city: "Dortmund", url: "..."},
+  //   {id: 4, matches: 3, city: "Dortmund", url: "..."},
+  //   {id: 5, matches: 0, city: "Dortmund", url: "..."},
+  //   {id: 6, matches: 9, city: "Mülheim an der Ruhr", url: "..."},
+  //   {id: 7, matches: 8, city: "Mülheim an der Ruhr", url: "..."},
+  //   {id: 8, matches: 7, city: "Mülheim an der Ruhr", url: "..."},
+  //   {id: 9, matches: 6, city: "Mülheim an der Ruhr", url: "..."},
+  //   {id: 10, matches: 11, city: "Bochum", url: "..."},
+  //   {id: 11, matches: 10, city: "Bochum", url: "..."},
+  // ]
+  const data = Geo.location
 
   const cityFilter = ref('')
   const cards = computed(() => {

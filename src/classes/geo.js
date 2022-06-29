@@ -1,5 +1,4 @@
-class geo {
-
+export class Geo {
   static location = [
     {id: 0, matches: 1, city: "Dortmund", url: "public/img/geo/DAF-Bahnhofsvorplatz-1.jpg"},
     {id: 1, matches: 0, city: "Dortmund", url: "public/img/geo/DAF-Bahnhofsvorplatz-2.jpg"},
@@ -29,7 +28,5 @@ class geo {
     {id: 25, matches: 24, city: "Dortmund", url: "public/img/geo/DAF-Stahlhaus(Löwenhof)-2.jpg"},
     {id: 26, matches: 27, city: "Dortmund", url: "public/img/geo/DAF-Synagoge(Platz-der-Synagoge)-1.jpg"},
     {id: 27, matches: 26, city: "Dortmund", url: "public/img/geo/DAF-Synagoge(Platz-der-Synagoge)-2.jpg"},
-
   ]
-    
 }
