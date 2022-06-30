@@ -28,16 +28,18 @@
   //   {id: 11, matches: 10, city: "Bochum", url: "..."},
   // ]
   const data = Geo.location
+  cardCnt.value = data.length
 
   const cityFilter = ref('')
   const cards = computed(() => {
     const filtered = data.filter(c => !cityFilter.value || c.city === cityFilter.value)
     while (filtered.length > cardCnt.value) {
-      const removed = filtered.pop()
+      const removed = filtered.shuffle().pop()
       const pairIndex = filtered.findIndex(c => c.matches === removed.id)
+      console.debug(pairIndex)
       filtered.splice(pairIndex, 1)
     }
-    return filtered
+    return filtered.shuffle()
   })
 
   const cities = computed(() => data.map(c => c.city).filter((c, i, a) => a.indexOf(c) === i))
@@ -48,6 +50,7 @@
       chamber.value.addPlayer(player)
       focusLastInput()
     }
+    if (cardCnt.value < chamber.value.players.length *2) cardCnt.value = chamber.value.players.length *2
   }
 
   function removePlayer(player) {
@@ -87,7 +90,7 @@
     <div class="gridItem">
       <div class="cardPick">
         <h2>Cards: {{ cardCnt }}</h2>
-        <input type="range" min="4" max="50" step="2" v-model.number="cardCnt" placeholder="Card Count" />
+        <input type="range" :min="chamber.players.length *2" :max="data.length" step="2" v-model.number="cardCnt" placeholder="Card Count" />
       </div>
       <div class="cityPick selectInputContainer">
         <label for="cityFilter">City: </label>
@@ -121,6 +124,7 @@
   display: grid;
   align-items: center;
   justify-content: center;
+  height: 100vh;
 } 
 
 .gridItem {
@@ -156,14 +160,14 @@
 }
 
 .cardPick input::-webkit-slider-thumb {
-  -webkit-appearance: false;
+  -webkit-appearance: none;
   appearance: none;
   width: 50px;
   height: 50px;
   border: 0;
   background: url('../assets/logo.svg') no-repeat;
   cursor: pointer;
-
+  box-shadow: none;
 }
 
 
