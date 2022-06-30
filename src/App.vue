@@ -1,12 +1,12 @@
 <template>
   <div>
 
-      <nav>
+      <!-- <nav>
         <router-link :to="{name:'home'}">Home <i class="fas fa-house"></i></router-link> | 
         <router-link :to="{name:'newgame'}">New Game <i class="fa-solid fa-gamepad"></i></router-link>
 
-      <!-- <router-link to="/about">About</router-link> -->
-      </nav>
+      <router-link to="/about">About</router-link>
+      </nav> -->
     <router-view></router-view>
   </div>
 </template>
@@ -67,7 +67,8 @@ body {
 .btn.disabled {
   color: #aaa;
   border: #aaa 1px solid;
-  background-color: rgba(0,0,0,0.05)
+  background-color: rgba(0,0,0,0.05);
+  cursor: not-allowed;
 }
 
 .textInputContainer input{
