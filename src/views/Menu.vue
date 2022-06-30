@@ -2,7 +2,7 @@
   import { computed } from '@vue/reactivity';
 
 
-  const lS = computed(() =>localStorage.getItem("geomory"));
+  const ls = computed(() =>localStorage.getItem("geomory"));
 </script>
 
 <template>
@@ -15,14 +15,14 @@
   <br>
   <br>
 
-    <router-link to="/newgame"> New Game <i class="fa-solid fa-gamepad"> </i> 
+    <router-link :to="{name: 'newgame'}"> New Game <i class="fa-solid fa-gamepad"> </i> 
     </router-link> 
 
     <br>
     <br>
 
 
-    <router-link to="/continuegame" v-if="ls != null"> Continue Game <i class="fa-solid fa-play"> </i>
+    <router-link :to="{name: 'continue'}" v-if="ls != null"> Continue Game <i class="fa-solid fa-play"> </i>
 
     </router-link> 
 </template>
