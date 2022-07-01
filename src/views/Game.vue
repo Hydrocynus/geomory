@@ -79,7 +79,7 @@ import { Card } from '@/classes/Card';
         </tr>
       </table>
     </div>
-    <div id="board">
+    <div id="board" :class="{gameover: gameover}">
       <div :class="{card: true, visible: card.visible, matched: card.matched}" v-for="card in stack.cards" @click="view(card)" :style="computeCardBackground(card.url)">
         ({{ card.id }}:{{ card.matches }})
       </div>
@@ -204,8 +204,12 @@ import { Card } from '@/classes/Card';
     visibility: hidden;
   }
 
-  #gameover {
+  #board.gameover .card {
+    display: none;
+  }
 
+  #gameover h2 {
+    color: #42b983;
   }
 
   #gameover span.multi:not(:last-child)::after {
