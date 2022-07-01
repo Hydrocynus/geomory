@@ -1,5 +1,6 @@
 <script setup>
-  import { Card } from '@/classes/Card';
+  import { Cache } from '@/classes/Cache';
+import { Card } from '@/classes/Card';
   import { CardStack } from '@/classes/CardStack';
   import { Player } from '@/classes/Player'
   import { PlayerChamber } from '@/classes/PlayerChamber'
@@ -9,7 +10,7 @@
   import { useRoute } from 'vue-router'
 
   const route = useRoute()
-  const players = JSON.parse(route.params.players || "[]")
+  const players = JSON.parse(route.params.players || "null") || Cache.players
   const chamber = ref(new PlayerChamber())
   chamber.value.addPlayer(...players.map(p => {
     const player = new Player(p.name)
@@ -23,7 +24,7 @@
   const sortedPlayerList = computed(() => JSON.parse(JSON.stringify(chamber.value.players))
                                           .sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0))
 
-  const cards = JSON.parse(route.params.cards || "[]")
+  const cards = JSON.parse(route.params.cards || "null") || Cache.cards
   const stack = ref(new CardStack())
   stack.value.add(...cards.map(c => new Card(c.url, c.city, c.matches, c.id)))
   setTimeout(() => {
@@ -117,11 +118,6 @@
     margin: 2.5px;
     padding: 2.5px;
     height: 2em;
-  }
-
-  #home {
-    text-decoration: none;
-    padding: unset;
   }
 
   #players {

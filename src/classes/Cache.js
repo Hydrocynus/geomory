@@ -1,18 +1,15 @@
-import { CardStack } from "./CardStack"
-import { PlayerChamber } from "./PlayerChamber"
-
 export class Cache {
   static get settings () {
     console.debug("get settings", this.geomory.settings)
     return this.geomory.settings ?? {}
   }
 
-  static get cardStack () {
-    return this.geomory.cardStack ?? new CardStack()
+  static get cards () {
+    return this.geomory.cards ?? []
   }
 
-  static get playerChamber () {
-    return this.geomory.playerChamber ?? new PlayerChamber()
+  static get players () {
+    return this.geomory.players ?? []
   }
 
   // --- //
@@ -26,15 +23,15 @@ export class Cache {
     this.geomory = tmp;
   }
 
-  static set cardStack (cardStack) {
+  static set cards (cards) {
     const tmp = this.geomory;
-    tmp.cardStack = cardStack;
+    tmp.cards = cards;
     this.geomory = tmp;
   }
 
-  static set playerChamber (playerChamber) {
+  static set players (players) {
     const tmp = this.geomory;
-    tmp.playerChamber = playerChamber;
+    tmp.players = players;
     this.geomory = tmp;
   }
 

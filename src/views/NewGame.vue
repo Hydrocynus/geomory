@@ -5,28 +5,25 @@
   import { Geo } from '@/classes/Geo'
   import router from '@/router';
   import { computed } from '@vue/reactivity';
+  import { Cache } from '@/classes/Cache';
 
   const chamber = ref(new PlayerChamber())
   const cardCnt = ref(4)
   const maxPlayers = 10
   const setPlayers = computed(() => chamber.value.players.filter(player => player.name.length > 0))
 
-  // const api = ""
-  // const data = await (await fetch(api)).json()
-  // const data = [
-  //   {id: 0, matches: 5, city: "Dortmund", url: "..."},
-  //   {id: 1, matches: 2, city: "Essen", url: "..."},
-  //   {id: 2, matches: 1, city: "Essen", url: "..."},
-  //   {id: 3, matches: 4, city: "Dortmund", url: "..."},
-  //   {id: 4, matches: 3, city: "Dortmund", url: "..."},
-  //   {id: 5, matches: 0, city: "Dortmund", url: "..."},
-  //   {id: 6, matches: 9, city: "Mülheim an der Ruhr", url: "..."},
-  //   {id: 7, matches: 8, city: "Mülheim an der Ruhr", url: "..."},
-  //   {id: 8, matches: 7, city: "Mülheim an der Ruhr", url: "..."},
-  //   {id: 9, matches: 6, city: "Mülheim an der Ruhr", url: "..."},
-  //   {id: 10, matches: 11, city: "Bochum", url: "..."},
-  //   {id: 11, matches: 10, city: "Bochum", url: "..."},
-  // ]
+  if (Cache.players !== []) {
+    chamber.value = new PlayerChamber
+    chamber.value.addPlayer(...Cache.players.map(p => {
+      const player = new Player(p.name)
+      p.score !== undefined    ? player.score    = p.score    : null
+      p.id !== undefined       ? player.id       = p.id       : null
+      p.activeIn !== undefined ? player.activeIn = p.activeIn : null
+      p.score !== undefined    ? player.score    = p.score    : null
+      return player
+    }))
+  }
+
   const data = Geo.location
   cardCnt.value = data.length
 
@@ -68,6 +65,14 @@
       players: JSON.stringify(setPlayers.value),
       cards: JSON.stringify(cards.value),
     }
+
+    Cache.settings = {
+      cardCnt: cardCnt.value,
+      cityFilter: cityFilter.value,
+    }
+    Cache.players = setPlayers.value
+    Cache.cards = cards.value
+
     router.push({name: "game", params: params})
   }
 
@@ -78,9 +83,12 @@
     }
   }
 
-  addPlayer()
-  addPlayer()
+  while (chamber.value.players.length < 2) addPlayer()
   setTimeout(() => document.querySelector(".playerInputContainer:first-of-type input")?.focus(), 0)
+
+  const settings = Cache.settings
+  cardCnt.value = settings?.cardCnt ?? cardCnt.value
+  cityFilter.value = settings?.cityFilter ?? cityFilter.value
 
 </script>
 
@@ -88,6 +96,7 @@
 
   <div class="gridContainer">
     <div class="gridItem">
+      <h1>New Game</h1>
       <div class="cardPick">
         <h2>Cards: {{ cardCnt }}</h2>
         <input type="range" :min="chamber.players.length *2" :max="data.length" step="2" v-model.number="cardCnt" placeholder="Card Count" />

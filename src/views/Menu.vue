@@ -2,7 +2,7 @@
   import { computed } from '@vue/reactivity';
 
 
-  const ls = computed(() =>localStorage.getItem("geomory"));
+  const isCache = false//computed(() => !!Cache.geomory);
 </script>
 
 <template>
@@ -15,14 +15,14 @@
   <br>
   <br>
 
-    <router-link :to="{name: 'newgame'}"> New Game <i class="fa-solid fa-gamepad"> </i> 
+    <router-link class="btn" :to="{name: 'newgame'}"> New Game <i class="fa-solid fa-gamepad"> </i> 
     </router-link> 
 
     <br>
     <br>
 
 
-    <router-link :to="{name: 'continue'}" v-if="ls != null"> Continue Game <i class="fa-solid fa-play"> </i>
+    <router-link class="btn" :to="{name: 'continue'}" v-if="isCache"> Continue Game <i class="fa-solid fa-play"> </i>
 
     </router-link> 
 </template>
