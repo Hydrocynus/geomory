@@ -71,6 +71,10 @@ body {
   cursor: not-allowed;
 }
 
+a.btn {
+    text-decoration: none;
+}
+
 .textInputContainer input{
   font-size: 1.3em;
   background-color: transparent;
